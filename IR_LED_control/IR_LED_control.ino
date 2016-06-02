@@ -101,7 +101,7 @@ void DHT11Update(){
   // Update DHT11 values.
   unsigned long currentMillis = millis();
   
-  if (currentMillis - previousMillis > 5000)
+  if (currentMillis - previousMillis > 2000)
   {
     // Sensor information retrieving
     Serial.print("\nRetrieving information from sensor: ");
@@ -176,25 +176,25 @@ void irRemoteUpdate(){
           {
             digitalWrite(RED_LED, LOW);// Turn off Red LED
             redBrightness = 0;
-            Serial.print("RED LED off\n");
+            Serial.println("RED LED off");
           }
           else
           {
             digitalWrite(RED_LED, HIGH);// Turn on Red LED
             redBrightness = 255;
-            Serial.print("RED LED on\n");
+            Serial.println("RED LED on");
           }
           break;
         case NEC_CHANNEL_UP:  //Channel +
           if (digitalRead(GREEN_LED) == HIGH)
           {
             digitalWrite(GREEN_LED, LOW);// Turn off Green LED
-            Serial.print("GREEN LED off\n");
+            Serial.println("GREEN LED off");
           }
           else
           {
             digitalWrite(GREEN_LED, HIGH);// Turn on Green LED
-            Serial.print("GREEN LED on\n");
+            Serial.println("GREEN LED on");
           }
           break;
         case NEC_CHANNEL:  //Channel
@@ -203,14 +203,14 @@ void irRemoteUpdate(){
             digitalWrite(GREEN_LED, LOW);// Turn off Green LED
             digitalWrite(RED_LED, LOW);// Turn off Red LED
             redBrightness = 0;
-            Serial.print("ALL LEDs off\n");
+            Serial.println("ALL LEDs off");
           }
           else
           {
             digitalWrite(GREEN_LED, HIGH);// Turn on Green LED
             digitalWrite(RED_LED, HIGH);// Turn on Red LED
             redBrightness = 255;
-            Serial.print("ALL LEDs on\n");
+            Serial.println("ALL LEDs on");
           }
           break;
         case NEC_VOL_DOWN:  // Vol -
@@ -220,8 +220,7 @@ void irRemoteUpdate(){
             analogWrite(RED_LED, redBrightness);
           }
           Serial.print("RED LED Brightness: ");
-          Serial.print(redBrightness);
-          Serial.print("\n");
+          Serial.println(redBrightness);
           break;
         case NEC_VOL_UP:  // Vol +
           if (redBrightness < 255)
@@ -230,28 +229,24 @@ void irRemoteUpdate(){
             analogWrite(RED_LED, redBrightness); 
           }
           Serial.print("RED LED Brightness: ");
-          Serial.print(redBrightness);
-          Serial.print("\n");
+          Serial.println(redBrightness);
           break;
         case NEC_1:  //Number 1 (Relay 1)
           if (digitalRead(RELAY_1) == HIGH)
           {
             digitalWrite(RELAY_1, LOW);
-            Serial.print("Relay 1 on");
-            Serial.print("\n");
+            Serial.println("Relay 1 on");
           }
           else
           {
             digitalWrite(RELAY_1, HIGH);
-            Serial.print("Relay 1 off");
-            Serial.print("\n");
+            Serial.println("Relay 1 off");
           }
           break;
         case NEC_REPEAT: //Repeat signal of previous press
           break;
         default:
-          Serial.print("NEC - Unknown command");
-          Serial.print("\n");
+          Serial.println("NEC - Unknown command");
         break;
       }
     }
@@ -266,25 +261,25 @@ void irRemoteUpdate(){
             {
               digitalWrite(RED_LED, LOW);// Turn off Red LED
               redBrightness = 0;
-              Serial.print("RED LED off\n");
+              Serial.println("RED LED off");
             }
             else
             {
               digitalWrite(RED_LED, HIGH);// Turn on Red LED
               redBrightness = 255;
-              Serial.print("RED LED on\n");
+              Serial.println("RED LED on");
             }
             break;
           case SONY_GREEN_UP:  //Green/up
             if (digitalRead(GREEN_LED) == HIGH)
             {
               digitalWrite(GREEN_LED, LOW);// Turn off Green LED
-              Serial.print("GREEN LED off\n");
+              Serial.println("GREEN LED off");
             }
             else
             {
               digitalWrite(GREEN_LED, HIGH);// Turn on Green LED
-              Serial.print("GREEN LED on\n");
+              Serial.println("GREEN LED on");
             }
             break;
           case SONY_POWER:  //Power
@@ -293,14 +288,14 @@ void irRemoteUpdate(){
               digitalWrite(GREEN_LED, LOW);// Turn off Green LED
               digitalWrite(RED_LED, LOW);// Turn off Red LED
               redBrightness = 0;
-              Serial.print("ALL LEDs off\n");
+              Serial.println("ALL LEDs off");
             }
             else
             {
               digitalWrite(GREEN_LED, HIGH);// Turn on Green LED
               digitalWrite(RED_LED, HIGH);// Turn on Red LED
               redBrightness = 255;
-              Serial.print("ALL LEDs on\n");
+              Serial.println("ALL LEDs on");
             }
             break;
           case SONY_VOL_DOWN:  // Vol -
@@ -310,8 +305,7 @@ void irRemoteUpdate(){
               analogWrite(RED_LED, redBrightness);
             }
             Serial.print("RED LED Brightness: ");
-            Serial.print(redBrightness);
-            Serial.print("\n");
+            Serial.println(redBrightness);
             break;
           case SONY_VOL_UP:  // Vol +
             if (redBrightness < 255)
@@ -320,26 +314,22 @@ void irRemoteUpdate(){
               analogWrite(RED_LED, redBrightness); 
             }
             Serial.print("RED LED Brightness: ");
-            Serial.print(redBrightness);
-            Serial.print("\n");
+            Serial.println(redBrightness);
             break;
           case SONY_1:  //Number 1 (Relay 1)
             if (digitalRead(RELAY_1) == HIGH)
             {
               digitalWrite(RELAY_1, LOW);
-              Serial.print("Relay 1 on");
-              Serial.print("\n");
+              Serial.println("Relay 1 on");
             }
             else
             {
               digitalWrite(RELAY_1, HIGH);
-              Serial.print("Relay 1 off");
-              Serial.print("\n");
+              Serial.println("Relay 1 off");
             }
             break;
           default:
-            Serial.print("SONY - Unknown command");
-            Serial.print("\n");
+            Serial.println("SONY - Unknown command");
           break;
         }
         sonyCount= 0;
@@ -350,8 +340,7 @@ void irRemoteUpdate(){
       }
     }
     else{
-      Serial.print("Invalid Input!");
-      Serial.print("\n");
+      Serial.println("Invalid Input!");
     }
     My_Receiver.resume(); //Restart the receiver
   }
