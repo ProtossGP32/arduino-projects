@@ -1,0 +1,3 @@
+[submodule "ArcadeStickMicro/lib/ArduinoJoystickLibrary"]
+	path = ArcadeStickMicro/lib/ArduinoJoystickLibrary
+	url = https://github.com/ProtossGP32/ArduinoJoystickLibrary.git
