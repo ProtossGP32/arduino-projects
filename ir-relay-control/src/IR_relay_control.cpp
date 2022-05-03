@@ -18,7 +18,7 @@
 #include "IRCodes.h"
 
 // Assign pins
-#define IR_RECEIVER 11
+#define IR_RECEIVER 9
 #define RELAY_1 5
 #define RELAY_1_NAME F("Relay 1")
 #define RELAY_2 6
@@ -117,6 +117,8 @@ void irRemoteUpdate(){
           break;
         default:
           DEBUG_SERIAL.print(protocolName);
+          DEBUG_SERIAL.print(HYPHEN);
+          DEBUG_SERIAL.print(myDecoder.value);
           DEBUG_SERIAL.print(HYPHEN);
           DEBUG_SERIAL.println(F("Unknown command"));
           break;
