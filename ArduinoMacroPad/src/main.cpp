@@ -22,9 +22,9 @@ void setup() {
 // Pin 6 = CTRL + C (Copy)
 // Pin 7 = CTRL + V (Paste)
 // Pin 8 = CTRL + X (Cut)
-// Pin 9 = ALT + TAB (Change window)
-// Pin 10 = 
-// Pin 14 = 
+// Pin 9 = CTRL + Z (Undo)
+// Pin 10 = CTRL + S (Save)
+// Pin 14 = ALT + TAB (Change window)
 // Pin 15 = 
 // Pin 16 =
 
