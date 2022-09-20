@@ -44,14 +44,15 @@ CCPotentiometer potentiometers[] = {
 const int ROW_NUM = 3; //four rows
 const int COLUMN_NUM = 4; //three columns
 
-char keys[ROW_NUM][COLUMN_NUM] = {
-  {'7','8','9','*'},
-  {'4','5','6','#'},
-  {'1','2','3','0'}
-};
+byte pin_rows[ROW_NUM] = {6, 7, 8}; //connect to the row pinouts of the keypad
+byte pin_column[COLUMN_NUM] = {2, 3, 4, 5}; //connect to the column pinouts of the keypad
 
-byte pin_rows[ROW_NUM] = {8, 7, 6}; //connect to the row pinouts of the keypad
-byte pin_column[COLUMN_NUM] = {5, 4, 3, 2}; //connect to the column pinouts of the keypad
+char keys[ROW_NUM][COLUMN_NUM] = {
+  // Pins 2, 3, 4, 5
+  {'7','8','9','*'}, // Pin 6
+  {'4','5','6','#'}, // Pin 7
+  {'1','2','3','0'}  // Pin 8
+};
 
 Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );
 
@@ -103,17 +104,17 @@ void loop(){
       // - Keypad 1 = CTRL + C (Copy)
       // - Keypad 2 = CTRL + V (Paste)
       // - Keypad 3 = CTRL + X (Cut)
-      // - Keypad 0 = (Missing)
+      // - Keypad 0 = (Pending)
       // Middle row
       // - Keypad 4 = CTRL + Z (Undo)
       // - Keypad 5 = CTRL + S (Save)
       // - Keypad 6 = ALT + TAB (Change window)
-      // - Keypad # = (Missing)
+      // - Keypad # = (Pending)
       // Top row
-      // - Keypad 7 = (Pending) Mute/Unmute
-      // - Keypad 8 = (Pending) Not defined yet
-      // - Keypad 9 = (Missing)
-      // - Keypad * = (Missing)
+      // - Keypad 7 = CTRL + SHIFT + M (Mute audio)
+      // - Keypad 8 = CTRL + SHIFT + U (Unmute audio)
+      // - Keypad 9 = (Pending)
+      // - Keypad * = (Pending)
       DEBUG_SERIAL.println(key);
       switch(key) {
         case '1': // Copy
@@ -146,11 +147,13 @@ void loop(){
           sizeOfModifiers = 1;
           keyToSend = KEY_TAB;
           break;
-        case '7': // Test button
-          sizeOfModifiers = 0;
-          keyToSend = key;
+        case '7': // Mute audio?
+          modifiers[0] = {KEY_LEFT_CTRL};
+          modifiers[1] = {KEY_LEFT_SHIFT}; 
+          sizeOfModifiers = 2;
+          keyToSend = 'm';
           break;
-        // Pending to add cases 7, 8, 9, #, * and 0
+        // Pending to add cases 8, 9, #, * and 0
         default:
           sizeOfModifiers = 0;
           keyToSend = NO_KEY;
